@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ecardapio.ui.theme.ECardapioTheme
-import com.example.ecardapio.view.LoginAdministrator
-import com.example.ecardapio.view.LoginCollaborator
-import com.example.ecardapio.view.SelectTypeUser
+import com.example.ecardapio.view.login.LoginAdministrator
+import com.example.ecardapio.view.login.LoginCollaborator
+import com.example.ecardapio.view.login.SelectTypeUser
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
