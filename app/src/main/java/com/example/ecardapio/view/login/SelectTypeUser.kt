@@ -29,13 +29,17 @@ import androidx.navigation.compose.rememberNavController
 import com.example.ecardapio.ui.theme.OpenSans
 
 @Composable
-fun SelectTypeUser(navController: NavController) {
+fun SelectTypeUser(
+    administrator: () -> Unit = {},
+    collaborator: () -> Unit = {},
+    register: () -> Unit = {},
+) {
     Box(
         Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
         Header()
-        Body(navController)
+        Body(administrator, collaborator, register)
     }
 }
 
@@ -68,7 +72,11 @@ fun Header() {
 }
 
 @Composable
-fun Body(navController: NavController) {
+fun Body(
+    administrator: () -> Unit,
+    collaborator: () -> Unit,
+    register: () -> Unit,
+    ) {
     Column(
         Modifier
             .fillMaxWidth()
@@ -78,7 +86,7 @@ fun Body(navController: NavController) {
             .padding(horizontal = 22.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { navController.navigate("loginAdministrator") },
+            onClick = { administrator() },
             Modifier
                 .fillMaxWidth()
                 .padding(top = 38.dp)
@@ -95,7 +103,7 @@ fun Body(navController: NavController) {
         }
 
         Button(
-            onClick = { navController.navigate("loginCollaborator")  },
+            onClick = { collaborator() },
             Modifier
                 .fillMaxWidth()
                 .padding(top = 25.dp)
@@ -112,7 +120,7 @@ fun Body(navController: NavController) {
         }
 
         Button(
-            onClick = { navController.navigate("registerUser")  },
+            onClick = { register() },
             Modifier
                 .fillMaxWidth()
                 .padding(top = 25.dp)
@@ -156,5 +164,5 @@ fun Body(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun SelectUserPrev() {
-    SelectTypeUser(rememberNavController())
+    SelectTypeUser()
 }

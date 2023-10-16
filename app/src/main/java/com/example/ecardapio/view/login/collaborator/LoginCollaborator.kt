@@ -1,4 +1,4 @@
-package com.example.ecardapio.view.login
+package com.example.ecardapio.view.login.collaborator
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

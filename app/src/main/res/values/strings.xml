@@ -2,4 +2,7 @@
     <string name="app_name">ECardapio</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register_user">RegisterUserActivity</string>
+    <string name="title_activity_administrator">AdministratorActivity</string>
+    <string name="title_activity_collaborator_login">CollaboratorLoginActivity</string>
 </resources>

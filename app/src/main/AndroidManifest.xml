@@ -13,6 +13,21 @@
         android:theme="@style/Theme.ECardapio"
         tools:targetApi="31">
         <activity
+            android:name=".view.login.administrator.AdministratorActivity"
+            android:exported="false"
+            android:label="@string/title_activity_administrator"
+            android:theme="@style/Theme.ECardapio" />
+        <activity
+            android:name=".view.login.collaborator.CollaboratorLoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_collaborator_login"
+            android:theme="@style/Theme.ECardapio" />
+        <activity
+            android:name=".view.login.register.RegisterUserActivity"
+            android:exported="false"
+            android:label="@string/title_activity_register_user"
+            android:theme="@style/Theme.ECardapio" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ECardapio">
