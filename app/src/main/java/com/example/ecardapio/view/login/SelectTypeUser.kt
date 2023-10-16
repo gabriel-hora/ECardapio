@@ -35,7 +35,7 @@ fun SelectTypeUser(navController: NavController) {
         contentAlignment = Alignment.BottomCenter
     ) {
         Header()
-        Body()
+        Body(navController)
     }
 }
 
@@ -48,7 +48,7 @@ fun Header() {
             .padding(start = 22.dp)
     ) {
         Column {
-            Spacer(Modifier.height(250.dp))
+            Spacer(Modifier.height(200.dp))
             Text(
                 text = "eCardapio",
                 color = Color.White,
@@ -68,25 +68,88 @@ fun Header() {
 }
 
 @Composable
-fun Body() {
+fun Body(navController: NavController) {
     Column(
         Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.4f)
+            .fillMaxHeight(0.5f)
             .clip(shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(color = Color.White)
-            .padding(horizontal = 22.dp)
+            .padding(horizontal = 22.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("loginAdministrator") },
             Modifier
                 .fillMaxWidth()
-                .padding(top = 38.dp),
+                .padding(top = 38.dp)
+                .height(60.dp),
             colors = ButtonDefaults.buttonColors(Color(0xFFEFD051)),
             shape = RoundedCornerShape(15.dp)
         ) {
-            Text(text = "ADMINISTRADOR")
+            Text(
+                text = "ADMINISTRADOR",
+                fontSize = 24.sp,
+                fontFamily = OpenSans,
+                fontWeight = FontWeight.ExtraBold
+            )
         }
+
+        Button(
+            onClick = { navController.navigate("loginCollaborator")  },
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 25.dp)
+                .height(60.dp),
+            colors = ButtonDefaults.buttonColors(Color(0xFFEFD051)),
+            shape = RoundedCornerShape(15.dp)
+        ) {
+            Text(
+                text = "COLABORADOR",
+                fontSize = 24.sp,
+                fontFamily = OpenSans,
+                fontWeight = FontWeight.ExtraBold
+            )
+        }
+
+        Button(
+            onClick = { navController.navigate("registerUser")  },
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 25.dp)
+                .height(60.dp),
+            colors = ButtonDefaults.buttonColors(Color(0xFFEFD051)),
+            shape = RoundedCornerShape(15.dp)
+        ) {
+            Text(
+                text = "CADASTRE-SE",
+                fontSize = 24.sp,
+                fontFamily = OpenSans,
+                fontWeight = FontWeight.ExtraBold
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 30.dp),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Algum problema?",
+                fontSize = 14.sp,
+                fontFamily = OpenSans,
+                fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 20.dp)
+            )
+
+            Text(
+                text = "ecardapio - v0.1",
+                fontSize = 12.sp,
+                fontFamily = OpenSans,
+                fontWeight = FontWeight.Light, modifier = Modifier.padding(top = 5.dp)
+            )
+        }
+
     }
 }
 
