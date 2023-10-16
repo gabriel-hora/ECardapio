@@ -1,7 +1,6 @@
 package com.example.ecardapio.view.login.register.header_register
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -21,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ecardapio.ui.theme.OpenSans
-import com.example.ecardapio.view.login.register.FlowRegister
 import com.example.ecardapio.view.login.register.RegisterStatus
 import com.example.ecardapio.view.login.register.viewmodel.RegisterViewModel
 
