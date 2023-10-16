@@ -1,4 +1,4 @@
-package com.example.ecardapio.view.login.register
+package com.example.ecardapio.view.login.register.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,20 +18,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.ecardapio.view.login.register.header_register.HeaderRegisterUser
+import com.example.ecardapio.view.login.register.viewmodel.RegisterViewModel
 
 @Composable
-fun RegisterUser(navController: NavController) {
+fun PersonalRegister(
+    navController: NavController,
+    registerViewModel: RegisterViewModel
+) {
     Box(
         Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
-        HeaderRegisterUser(navController)
-        BodyRegisterUser()
+        HeaderRegisterUser(navController, registerViewModel)
+        BodyRegisterUser(navController)
     }
 }
 
 @Composable
-fun BodyRegisterUser() {
+fun BodyRegisterUser(navController: NavController) {
     Column(
         Modifier
             .fillMaxWidth()
@@ -38,7 +43,9 @@ fun BodyRegisterUser() {
             .clip(shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(color = Color.White)
     ) {
-
+        Button(onClick = { navController.navigate("businessRegister") }) {
+            
+        }
     }
 }
 
@@ -47,5 +54,5 @@ fun BodyRegisterUser() {
 )
 @Composable
 fun RegisterUserPrev() {
-    RegisterUser(rememberNavController())
+    PersonalRegister(rememberNavController(), registerViewModel = RegisterViewModel())
 }

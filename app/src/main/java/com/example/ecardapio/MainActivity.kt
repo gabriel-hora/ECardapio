@@ -6,6 +6,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.ecardapio.ui.theme.ECardapioTheme
 import com.example.ecardapio.view.login.SelectTypeUser
+import com.example.ecardapio.view.login.administrator.AdministratorLoginActivity
+import com.example.ecardapio.view.login.collaborator.CollaboratorLoginActivity
 import com.example.ecardapio.view.login.register.RegisterUserActivity
 
 class MainActivity : ComponentActivity() {
@@ -28,12 +30,12 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun administratorIntent() {
-        val intent = Intent(this, RegisterUserActivity::class.java)
+        val intent = Intent(this, AdministratorLoginActivity::class.java)
         startActivity(intent)
     }
 
     private fun collaboratorIntent() {
-        val intent = Intent(this, RegisterUserActivity::class.java)
+        val intent = Intent(this, CollaboratorLoginActivity::class.java)
         startActivity(intent)
     }
 }

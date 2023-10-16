@@ -3,44 +3,43 @@ package com.example.ecardapio.view.login.register
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.ecardapio.ui.theme.ECardapioTheme
+import com.example.ecardapio.view.login.register.composable.BusinessRegister
+import com.example.ecardapio.view.login.register.composable.PersonalRegister
+import com.example.ecardapio.view.login.register.composable.UserRegister
+import com.example.ecardapio.view.login.register.viewmodel.RegisterViewModel
 
 class RegisterUserActivity : ComponentActivity() {
+
+    private val registerViewModel by viewModels<RegisterViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ECardapioTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+                val navController = rememberNavController()
+
+                NavHost(navController = navController, startDestination = "personalUser") {
+                    composable(route = "personalUser") {
+                        PersonalRegister(navController, registerViewModel)
+                        registerViewModel.changeStatusRegister(RegisterStatus.PERSONAL)
+                    }
+
+                    composable(route = "businessRegister") {
+                        BusinessRegister(navController, registerViewModel)
+                        registerViewModel.changeStatusRegister(RegisterStatus.BUSINESS)
+                    }
+
+                    composable(route = "userRegister") {
+                        UserRegister()
+                        registerViewModel.changeStatusRegister(RegisterStatus.USER)
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ECardapioTheme {
-        Greeting("Android")
     }
 }

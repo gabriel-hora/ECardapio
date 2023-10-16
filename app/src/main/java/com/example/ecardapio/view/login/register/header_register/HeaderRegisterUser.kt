@@ -1,5 +1,7 @@
 package com.example.ecardapio.view.login.register.header_register
 
+import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -13,14 +15,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ecardapio.ui.theme.OpenSans
+import com.example.ecardapio.view.login.register.FlowRegister
+import com.example.ecardapio.view.login.register.RegisterStatus
+import com.example.ecardapio.view.login.register.viewmodel.RegisterViewModel
 
 @Composable
-fun HeaderRegisterUser(navController: NavController) {
+fun HeaderRegisterUser(
+    navController: NavController,
+    registerViewModel: RegisterViewModel
+) {
+    val activity = (LocalContext.current as? Activity)
+    val state = registerViewModel.registerFlowState
+
     Column(
         Modifier
             .background(Color(0xFF99D8CD))
@@ -31,9 +43,25 @@ fun HeaderRegisterUser(navController: NavController) {
             imageVector = Icons.Default.ArrowBack,
             contentDescription = "Image Button Arrow Back",
             tint = Color.White,
-            modifier = Modifier.size(35.dp).clickable {
-                navController.popBackStack()
-            }
+            modifier = Modifier
+                .size(35.dp)
+                .clickable {
+                    when (state.value.registerStatus) {
+                        RegisterStatus.PERSONAL -> {
+                            activity?.finish()
+                        }
+
+                        RegisterStatus.BUSINESS -> {
+                            navController.popBackStack()
+                            registerViewModel.changeStatusRegister(RegisterStatus.PERSONAL)
+                        }
+
+                        RegisterStatus.USER -> {
+                            navController.popBackStack()
+                            registerViewModel.changeStatusRegister(RegisterStatus.BUSINESS)
+                        }
+                    }
+                }
         )
 
         Text(
