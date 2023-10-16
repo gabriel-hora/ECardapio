@@ -1,4 +1,4 @@
-package com.example.ecardapio.view.login.register.header_register
+package com.example.ecardapio.view.login.register.composable
 
 import android.app.Activity
 import androidx.compose.foundation.background
