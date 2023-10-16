@@ -5,4 +5,5 @@
     <string name="title_activity_register_user">RegisterUserActivity</string>
     <string name="title_activity_administrator">AdministratorActivity</string>
     <string name="title_activity_collaborator_login">CollaboratorLoginActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>

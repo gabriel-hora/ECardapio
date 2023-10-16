@@ -1,46 +1,51 @@
 package com.example.ecardapio.view.login.administrator
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.ecardapio.view.login.administrator.ui.theme.ECardapioTheme
+import androidx.activity.viewModels
+import androidx.compose.runtime.LaunchedEffect
+import com.example.ecardapio.ui.theme.ECardapioTheme
+import com.example.ecardapio.view.home.HomeActivity
+import com.example.ecardapio.view.login.administrator.viewmodel.LoginAdministratorViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class AdministratorLoginActivity : ComponentActivity() {
+
+    private val loginAdministratorViewModel by viewModels<LoginAdministratorViewModel>()
+    private lateinit var auth : FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ECardapioTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting3("Android")
+                auth = Firebase.auth
+
+                LoginAdministrator(loginAdministratorViewModel)
+
+                LaunchedEffect(key1 = applicationContext) {
+                    loginAdministratorViewModel.validationEvents.collect() { event ->
+                        loginUser()
+                    }
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting3(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview3() {
-    ECardapioTheme {
-        Greeting3("Android")
+    private fun loginUser() {
+        val state = loginAdministratorViewModel.state
+        auth.signInWithEmailAndPassword(state.email, state.password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Log.e("Login", "Error")
+                }
+            }
     }
 }

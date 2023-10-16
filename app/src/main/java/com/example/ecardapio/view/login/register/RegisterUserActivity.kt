@@ -1,5 +1,7 @@
 package com.example.ecardapio.view.login.register
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -7,10 +9,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ecardapio.ui.theme.ECardapioTheme
+import com.example.ecardapio.view.login.administrator.AdministratorLoginActivity
 import com.example.ecardapio.view.login.register.composable.BusinessRegister
 import com.example.ecardapio.view.login.register.composable.PersonalRegister
 import com.example.ecardapio.view.login.register.composable.UserRegister
@@ -20,12 +24,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
 
 class RegisterUserActivity : ComponentActivity() {
 
     private val registerViewModel by viewModels<RegisterViewModel>()
     private lateinit var auth: FirebaseAuth
-    private lateinit var myRef : DatabaseReference
+    private lateinit var myRef: DatabaseReference
     private val database = Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +38,8 @@ class RegisterUserActivity : ComponentActivity() {
         setContent {
             ECardapioTheme {
                 auth = Firebase.auth
-                myRef = database.getReferenceFromUrl("https://e-cardapio-d67c6-default-rtdb.firebaseio.com/")
+                myRef =
+                    database.getReferenceFromUrl("https://e-cardapio-d67c6-default-rtdb.firebaseio.com/")
 
                 val navController = rememberNavController()
 
@@ -59,6 +65,14 @@ class RegisterUserActivity : ComponentActivity() {
                         when (event) {
                             is RegisterViewModel.ValidationEvent.Success -> {
                                 registerUser()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "REGISTRADO COM SUCESSO",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                delay(2000L)
+                                val intent = Intent(applicationContext, AdministratorLoginActivity::class.java)
+                                startActivity(intent)
                             }
 
                             is RegisterViewModel.ValidationEvent.Error -> {
@@ -94,10 +108,18 @@ class RegisterUserActivity : ComponentActivity() {
 
                         myRef.child("users").child(it).child("business").child("Cidade")
                             .setValue(state.city)
+
+                        myRef.child("users").child(it).child("codeCollaborator").child("code")
+                            .setValue(generateCodeCollaborator())
                     }
                 } else {
                     Log.e("register", "failed")
                 }
             }
+    }
+
+    private fun generateCodeCollaborator(): String {
+        val caracteres = ('A'..'Z') + ('0'..'9')
+        return (1..7).map { caracteres.random() }.joinToString("")
     }
 }

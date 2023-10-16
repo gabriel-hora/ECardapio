@@ -1,4 +1,4 @@
-package com.example.ecardapio.view.login.administrator.ui.theme
+package com.example.ecardapio.view.home.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
