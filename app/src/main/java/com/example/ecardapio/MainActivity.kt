@@ -23,7 +23,6 @@ class MainActivity : ComponentActivity() {
             ECardapioTheme {
                 SelectTypeUser(
                     { administratorIntent() },
-                    { collaboratorIntent() },
                     { registerIntent() }
                 )
             }
@@ -37,11 +36,6 @@ class MainActivity : ComponentActivity() {
 
     private fun administratorIntent() {
         val intent = Intent(this, AdministratorLoginActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun collaboratorIntent() {
-        val intent = Intent(this, CollaboratorLoginActivity::class.java)
         startActivity(intent)
     }
 

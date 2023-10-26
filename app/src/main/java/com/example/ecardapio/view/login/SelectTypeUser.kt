@@ -28,7 +28,6 @@ import com.example.ecardapio.ui.theme.OpenSans
 @Composable
 fun SelectTypeUser(
     administrator: () -> Unit = {},
-    collaborator: () -> Unit = {},
     register: () -> Unit = {},
 ) {
     Box(
@@ -36,7 +35,7 @@ fun SelectTypeUser(
         contentAlignment = Alignment.BottomCenter
     ) {
         Header()
-        Body(administrator, collaborator, register)
+        Body(administrator, register)
     }
 }
 
@@ -71,13 +70,12 @@ fun Header() {
 @Composable
 fun Body(
     administrator: () -> Unit,
-    collaborator: () -> Unit,
     register: () -> Unit,
     ) {
     Column(
         Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.5f)
+            .fillMaxHeight(0.4f)
             .clip(shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(color = Color.White)
             .padding(horizontal = 22.dp), horizontalAlignment = Alignment.CenterHorizontally
@@ -92,24 +90,7 @@ fun Body(
             shape = RoundedCornerShape(15.dp)
         ) {
             Text(
-                text = "ADMINISTRADOR",
-                fontSize = 24.sp,
-                fontFamily = OpenSans,
-                fontWeight = FontWeight.ExtraBold
-            )
-        }
-
-        Button(
-            onClick = { collaborator() },
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 25.dp)
-                .height(60.dp),
-            colors = ButtonDefaults.buttonColors(Color(0xFFEFD051)),
-            shape = RoundedCornerShape(15.dp)
-        ) {
-            Text(
-                text = "COLABORADOR",
+                text = "LOGIN",
                 fontSize = 24.sp,
                 fontFamily = OpenSans,
                 fontWeight = FontWeight.ExtraBold

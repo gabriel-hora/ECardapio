@@ -31,7 +31,6 @@ class HomeActivity : ComponentActivity() {
             ECardapioTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     Column(Modifier.fillMaxSize()) {
-                        //HomeScreen()
                         TabNavigation(viewModelHome)
                     }
                 }
