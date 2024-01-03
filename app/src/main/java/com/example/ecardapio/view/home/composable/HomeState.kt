@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ecardapio.view.home.util.ScreenState
+import com.example.ecardapio.view.home.util.UiState
 import com.example.ecardapio.view.home.viewModel.DataHomeViewModel
 import com.example.ecardapio.view.home.viewModel.ViewModelHome
 
@@ -24,7 +25,8 @@ fun HomeState(viewModelData: DataHomeViewModel, viewModelHome: ViewModelHome) {
         }
 
         ScreenState.SUCCESS -> {
-            TabNavigation(viewModelHome = viewModelHome, nameBusiness = "")
+            val name = viewModelData.dataPersonal.value as UiState.Success
+            TabNavigation(viewModelHome = viewModelHome, nameBusiness = name.data)
         }
 
         else -> {}
