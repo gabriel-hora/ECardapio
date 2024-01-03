@@ -1,17 +1,21 @@
 package com.example.ecardapio.view.home.repository
 
-import android.util.Log
+import com.example.ecardapio.view.home.util.UiState
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import kotlinx.coroutines.tasks.await
 
 class DataFirebaseRepositoryImpl(
-    private val database: DatabaseReference
+    private val database: DatabaseReference,
+    private val auth: FirebaseAuth
 ) : DataFirebaseRepository {
-    override suspend fun getNameBusiness(): String {
-        val result = database.child("users").get().addOnCompleteListener {
-            // TODO: Resolver TASK NÃO FOI COMPLETADA
-        }
+    override suspend fun getNameBusiness(result: (UiState<String>) -> Unit) {
 
-        return "FUNCIONOU"
+        database
+            .child("users").child(auth.uid!!).child("personal").child("name").get()
+            .addOnCompleteListener {
+                result.invoke(UiState.Success(it.result.value.toString()))
+            }.addOnFailureListener {
+                result.invoke(UiState.Failure(it.message))
+            }
     }
 }
