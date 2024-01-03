@@ -2,7 +2,7 @@ package com.example.ecardapio.view.home.composable
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,9 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -63,6 +60,44 @@ fun TabNavigation(viewModelHome: ViewModelHome) {
     val tabItems = viewModelHome.getListItemsNavigation()
 
     Column(Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.1f)
+                .clip(shape = RoundedCornerShape(bottomEnd = 15.dp, bottomStart = 15.dp))
+                .shadow(elevation = 1.dp)
+                .background(BlueLight),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    modifier = Modifier.padding(15.dp),
+                    text = "Restaurante do José",
+                    fontFamily = OpenSans,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 16.sp,
+                    color = Color.White
+                )
+            }
+        }
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.9f)
+        ) { index ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = tabItems[index].title)
+            }
+        }
+
         TabRow(selectedTabIndex = selectedTabIndex, divider = {}) {
             tabItems.forEachIndexed { index, item ->
                 Tab(
@@ -84,55 +119,6 @@ fun TabNavigation(viewModelHome: ViewModelHome) {
                     selectedContentColor = Color.Black,
                     unselectedContentColor = Color.Gray,
                 )
-            }
-        }
-
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.8f)
-        ) { index ->
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = tabItems[index].title)
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.2f)
-                .clip(shape = RoundedCornerShape(topEnd = 15.dp, topStart = 15.dp))
-                .shadow(elevation = 1.dp)
-                .background(BlueLight)
-        ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    modifier = Modifier.padding(15.dp),
-                    text = "Restaurante do José",
-                    fontFamily = OpenSans,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp,
-                    color = Color.White
-                )
-
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(15.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFEFD051)
-                    )
-                ) {
-                    Text(text = "ADICIONAR PEDIDO")
-                }
             }
         }
     }
