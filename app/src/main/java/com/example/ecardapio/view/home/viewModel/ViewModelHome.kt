@@ -1,10 +1,5 @@
 package com.example.ecardapio.view.home.viewModel
 
-import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ecardapio.view.home.repository.TabItemNavigationRepository
@@ -16,7 +11,6 @@ class ViewModelHome(
     fun getListItemsNavigation(): List<TabItem> {
         return tabItemNavigationRepository.getTabItem()
     }
-
 }
 
 @Suppress("UNCHECKED_CAST")

@@ -91,8 +91,8 @@ class RegisterUserActivity : ComponentActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     task.result.user?.uid?.let {
-                        myRef.child("users").child(it).child("personal").child(state.name)
-                            .setValue("Gabriel Hora")
+                        myRef.child("users").child(it).child("personal").child("name")
+                            .setValue(state.name)
 
                         myRef.child("users").child(it).child("personal").child("phone")
                             .setValue(state.phoneNumber)
@@ -103,10 +103,10 @@ class RegisterUserActivity : ComponentActivity() {
                         myRef.child("users").child(it).child("business").child("nameBusiness")
                             .setValue(state.nameBusiness)
 
-                        myRef.child("users").child(it).child("business").child("Estado")
+                        myRef.child("users").child(it).child("business").child("estado")
                             .setValue(state.state)
 
-                        myRef.child("users").child(it).child("business").child("Cidade")
+                        myRef.child("users").child(it).child("business").child("cidade")
                             .setValue(state.city)
 
                         myRef.child("users").child(it).child("codeCollaborator").child("code")

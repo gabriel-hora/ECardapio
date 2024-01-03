@@ -37,7 +37,7 @@ import com.example.ecardapio.view.home.viewModel.ViewModelHome
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TabNavigation(viewModelHome: ViewModelHome) {
+fun TabNavigation(viewModelHome: ViewModelHome, nameBusiness : String) {
 
     var selectedTabIndex by remember {
         mutableIntStateOf(0)
@@ -71,11 +71,12 @@ fun TabNavigation(viewModelHome: ViewModelHome) {
         ) {
             Column(
                 modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 Text(
                     modifier = Modifier.padding(15.dp),
-                    text = "Restaurante do José",
+                    text = nameBusiness,
                     fontFamily = OpenSans,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
@@ -127,5 +128,5 @@ fun TabNavigation(viewModelHome: ViewModelHome) {
 @Preview
 @Composable
 fun TabNavigationPrev() {
-    TabNavigation(viewModelHome = ViewModelHome(TabItemNavigationRepository()))
+    TabNavigation(viewModelHome = ViewModelHome(TabItemNavigationRepository()), "")
 }
