@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -33,12 +35,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.ecardapio.ui.theme.OpenSans
 import com.example.ecardapio.view.login.administrator.event.LoginAdministratorFormEvent
 import com.example.ecardapio.view.login.administrator.viewmodel.LoginAdministratorViewModel
-import com.example.ecardapio.view.login.register.event.RegistrationFormEvent
-import com.example.ecardapio.view.login.register.viewmodel.RegisterViewModel
 
 @Composable
 fun LoginAdministrator(loginAdministratorViewModel: LoginAdministratorViewModel) {
@@ -102,6 +101,7 @@ fun BodyRegisterUser(loginAdministratorViewModel: LoginAdministratorViewModel) {
             .fillMaxHeight(0.8f)
             .clip(shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(color = Color.White)
+            .verticalScroll(rememberScrollState())
     ) {
         Column(Modifier.padding(start = 22.dp)) {
             Text(
@@ -149,7 +149,8 @@ fun BodyRegisterUser(loginAdministratorViewModel: LoginAdministratorViewModel) {
                     cursorColor = Color.Black,
                     focusedBorderColor = Color(0xFFC5C5C5)
                 ),
-                placeholder = { Text(text = "ecardapio@gmail.com", color = Color(0x664A4F55)) }
+                placeholder = { Text(text = "ecardapio@gmail.com", color = Color(0x664A4F55)) },
+                singleLine = true
             )
         }
 
@@ -180,8 +181,9 @@ fun BodyRegisterUser(loginAdministratorViewModel: LoginAdministratorViewModel) {
                     focusedBorderColor = Color(0xFFC5C5C5)
                 ),
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number
-                )
+                    keyboardType = KeyboardType.Password
+                ),
+                singleLine = true
             )
         }
 
@@ -190,7 +192,7 @@ fun BodyRegisterUser(loginAdministratorViewModel: LoginAdministratorViewModel) {
             onClick = { loginAdministratorViewModel.onEvent(LoginAdministratorFormEvent.Submit) },
             Modifier
                 .fillMaxWidth()
-                .padding(start = 30.dp, end = 30.dp, top = 60.dp)
+                .padding(start = 30.dp, end = 30.dp, top = 60.dp, bottom = 20.dp)
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(Color(0xFFEFD051)),
             shape = RoundedCornerShape(15.dp)
